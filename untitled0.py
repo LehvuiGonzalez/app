@@ -84,8 +84,10 @@ def calcular_distancias(df, top_n=10):
     return pd.DataFrame(dist_matrix, index=top_compradores.index, columns=top_compradores.index)
 
 def main():
+    """Función principal de la aplicación Streamlit."""  # Se requiere para mantener el orden
+
     st.title("📊 Análisis de Clientes y Finanzas")
-    df = cargar()
+    df = cargar()  # Cargar datos
 
     menu = ["🏠 Inicio", "📈 Análisis de Correlación", "🌍 Mapa de Ubicación",
             "🛒 Clúster de Frecuencia", "📊 Gráfico de Barras", "🔥 Mapa de Calor de Ingresos",
@@ -95,7 +97,7 @@ def main():
 
     if opcion == "🏠 Inicio":
         st.markdown("## 🏠 Bienvenido al Panel de Análisis")
-        st.write("Este panel te permite visualizar datos sobre clientes, incluyendo análisis de correlación, ubicaciones y tendencias de compra.")
+        st.write("Este panel permite visualizar datos sobre clientes, incluyendo análisis de correlación, ubicaciones y tendencias de compra.")
 
     elif opcion == "📈 Análisis de Correlación":
         st.markdown("## 📈 Correlación entre Edad e Ingreso Anual")
@@ -108,17 +110,25 @@ def main():
         st.write("### 📊 Correlación por Frecuencia de Compra")
         st.dataframe(corr["Por Frecuencia"])
 
-    elif opcion == "Mapa de Ubicación":
+    elif opcion == "🌍 Mapa de Ubicación":
         st.markdown("## 🌍 Mapa de Ubicación de Clientes")
-    
-        filtro_col = st.selectbox("Filtrar por", [None, "Género", "Frecuencia_Compra"])
-        filtro_valor = None  # Se asegura que siempre tenga un valor
-    
-        if filtro_col and filtro_col in df.columns:
-            valores_unicos = df[filtro_col].dropna().unique().tolist()
-            filtro_valor = st.selectbox("Selecciona el valor", valores_unicos)
-    
-        mapa_ubicacion(df, filtro_col, filtro_valor)
+
+        # Verifica que las columnas de coordenadas existan
+        if "Latitud" not in df.columns or "Longitud" not in df.columns:
+            st.error("⚠️ No se encontraron columnas de Latitud y Longitud en los datos.")
+        else:
+            filtro_col = st.selectbox("Filtrar por", [None, "Género", "Frecuencia_Compra"])
+            filtro_valor = None  # Inicializa sin filtro
+
+            if filtro_col and filtro_col in df.columns:
+                valores_unicos = df[filtro_col].dropna().unique().tolist()
+                filtro_valor = st.selectbox("Selecciona el valor", valores_unicos)
+
+            mapa_ubicacion(df, filtro_col, filtro_valor)
+
+    elif opcion == "🛒 Clúster de Frecuencia":
+        st.markdown("## 🛒 Clúster de Clientes por Frecuencia de Compra")
+        cluster_frecuencia(df)
 
     elif opcion == "📊 Gráfico de Barras":
         st.markdown("## 📊 Distribución de Clientes")
