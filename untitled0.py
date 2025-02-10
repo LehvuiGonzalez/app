@@ -173,12 +173,12 @@ def mapa_ubicacion(df, filtro_col=None, filtro_valor=None):
     plt.show()
 
 
-def mapa_personalizado(df, filtros,url):
+def mapa_personalizado(df, filtros):
     """Genera un mapa con filtros personalizados en hasta 4 variables."""
     df_filtrado = df.copy()
     for var, (min_val, max_val) in filtros.items():
         df_filtrado = df_filtrado[df_filtrado[var].between(min_val, max_val)]
-    mapa_ubicacion(df_filtrado,url)
+    mapa_ubicacion(df_filtrado)
 
 
 def cluster_frecuencia_compra(df):
