@@ -10,10 +10,6 @@ Original file is located at
 [geodatasets](https://geodatasets.readthedocs.io/en/latest/) no es una librería nativa de Python por lo que **requiere ser instalada antes de ser invocada**.
 """
 
-# Instalar geodatasets
-!pip install geodatasets
-!pip install streamlit
-
 """Importar librerias"""
 
 import pandas as pd
