@@ -56,7 +56,7 @@ def mapa_ubicacion(df, filtro_col=None, filtro_valor=None):
     plt.title("📍 Ubicación de Clientes")
     st.pyplot(fig)
 
-def cluster_frecuencia_compra(df):
+def cluster_frecuencia(df):
     fig, ax = plt.subplots(figsize=(8, 5))
     df["Frecuencia_Compra"].value_counts().plot(kind="bar", ax=ax, color="skyblue", edgecolor="black")
     plt.title("🛒 Clúster de Frecuencia de Compra")
