@@ -95,7 +95,7 @@ def cargar():
 
 """funciones"""
 
-def graficar_suramerica(url):
+def graficar_suramerica():
     """Carga un shapefile desde una URL y devuelve un GeoDataFrame
     con los países de Suramérica.
 
@@ -105,6 +105,7 @@ def graficar_suramerica(url):
     Returns:
         geopandas.GeoDataFrame: GeoDataFrame con los países de Suramérica.
     """
+    url = "https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip"
     world = gpd.read_file(f"/vsizip/vsicurl/{url}")
 
 
@@ -120,7 +121,7 @@ def graficar_suramerica(url):
     return world[world["ADMIN"].isin(paises_suramerica)]
 
 # URL del shapefile (ejemplo)
-url = "https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip"
+
 
 # Obtener el GeoDataFrame de Suramérica
 
@@ -137,7 +138,7 @@ def correlacion_edad_ingreso(df):
 
 
 
-def mapa_ubicacion(df, url_shapefile, filtro_col=None, filtro_valor=None):
+def mapa_ubicacion(df, filtro_col=None, filtro_valor=None):
     """
     Genera un mapa de ubicación de clientes con opción de filtrado.
 
@@ -151,7 +152,7 @@ def mapa_ubicacion(df, url_shapefile, filtro_col=None, filtro_valor=None):
         None
     """
     # Cargar el mapa de Sudamérica y asegurarse de que está en EPSG:4326
-    suramerica = graficar_suramerica(url_shapefile)
+    suramerica = graficar_suramerica()
 
     # Crear GeoDataFrame de clientes en EPSG:4326
     gdf = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df["Longitud"], df["Latitud"]))
