@@ -108,13 +108,17 @@ def main():
         st.write("### 📊 Correlación por Frecuencia de Compra")
         st.dataframe(corr["Por Frecuencia"])
 
-    elif opcion == "🌍 Mapa de Ubicación":
-        st.markdown("## 🌍 Mapa de Ubicación de Clientes")
-        filtro_col = st.selectbox("Filtrar por", [None, "Género", "Frecuencia_Compra"])
-        if filtro_col:
-            filtro_valor = st.selectbox("Selecciona el valor", df[filtro_col].unique())
-        mapa_ubicacion(df, filtro_col, filtro_valor)
+   elif opcion == "🌍 Mapa de Ubicación":
+    st.markdown("## 🌍 Mapa de Ubicación de Clientes")
+    filtro_col = st.selectbox("Filtrar por", [None, "Género", "Frecuencia_Compra"])
+    
+    filtro_valor = None  # Asegurar que siempre tenga un valor
 
+    if filtro_col and filtro_col in df.columns:
+        valores_unicos = df[filtro_col].dropna().unique().tolist()
+        filtro_valor = st.selectbox("Selecciona el valor", valores_unicos)
+    
+    mapa_ubicacion(df, filtro_col, filtro_valor)
     elif opcion == "🛒 Clúster de Frecuencia":
         st.markdown("## 🛒 Clúster de Frecuencia de Compra")
         cluster_frecuencia_compra(df)
