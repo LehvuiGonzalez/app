@@ -4,3 +4,4 @@ numpy
 streamlit
 scipy
 geodatasets
+matplotlib
