@@ -111,7 +111,6 @@ def main():
     elif opcion == "🌍 Mapa de Ubicación":
         st.markdown("## 🌍 Mapa de Ubicación de Clientes")
         filtro_col = st.selectbox("Filtrar por", [None, "Género", "Frecuencia_Compra"])
-        filtro_valor = None
         if filtro_col:
             filtro_valor = st.selectbox("Selecciona el valor", df[filtro_col].unique())
         mapa_ubicacion(df, filtro_col, filtro_valor)
