@@ -218,8 +218,8 @@ def calcular_distancias(df, top_n=10):
 
 corelaciomnes = correlacion_edad_ingreso(clientes2)
 print("Correlaciones:", corelaciomnes)
-mapa_ubicacion(clientes2,url)
-mapa_personalizado(clientes2, {"Edad": (20, 40), "Ingreso_Anual_USD": (0, 100000)},url)
+mapa_ubicacion(clientes2)
+mapa_personalizado(clientes2, {"Edad": (20, 40), "Ingreso_Anual_USD": (0, 100000)})
 cluster_frecuencia_compra(clientes2)
 grafico_barras_genero_frecuencia(clientes2)
 mapa_calor_ingresos(clientes2)
